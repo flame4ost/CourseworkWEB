@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+  
+  <table class="table">        
+    <thead>      
+      <tr> 
+        <th scope="col">License Plate</th>
+        <th scope="col">Resident</th>
+        <th scope="col">Month</th>
+        <th scope="col">Year</th>        
+        <th scope="col">Total Due</th>
+      </tr>
+    </thead>
+    
+    <tbody>        
+      {% for bill in object_list %}
+      <tr>
+        <th scope="row">{{bill.car}}</th>
+        <td>{{bill.car.resident}}</td>
+        <td>{{bill.month}}</td>
+        <td>{{bill.year}}</td>
+        <td>$ {{bill.total_due}}</td>        
+      </tr> 
+    {% endfor %}     
+    </tbody>
+      
+  </table>
+</div>
+{% endblock %}

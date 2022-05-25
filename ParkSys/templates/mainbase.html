@@ -1,0 +1,114 @@
+{% if user.is_authenticated %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Розумна система паркування</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  {% block head %}
+  {% endblock %}
+  <style>
+    body{
+      background-color:  #f1f1f1;;
+    }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      min-height: 900px;
+      box-sizing:border-box;
+      
+    }
+    .sidenav a{
+      
+      font-size: medium;
+      font-weight:bold;
+      text-align: right;
+      padding-top: 0.9em;
+      margin-top: 0.9em;
+    }
+    .formss{
+      margin-left: 1.5em;
+      margin-right: 1.5em;
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      width:70%;
+    }
+    
+        
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid col-lg-12 " style="background-color: rgba(0, 0, 0, 0.2);" >
+  <header class=" text-center page-header" >
+    <h1>Система парковки</h1>
+    <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;"  href="../accounts/logout">Logout</a>
+    
+  </header>
+  </div>
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar" >
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        
+        <li><a href="{% url 'update' %}">Update Profile</a></li>
+        <li><a href="{% url 'parkhistory' %}">View History</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-1 sidenav hidden-xs" style="background-color:#dadada; font-color:white; ">
+   
+      <ul class="nav nav-pills nav-stacked">
+        
+
+<li><a href="{% url 'home' %}">Home <span class="glyphicon glyphicon-home"></span></a></li>
+        
+        <li><a href="{% url 'update' %}">Update Profile <span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="{% url 'parkhistory' %}">View History <span class="glyphicon glyphicon-info-sign"></span></a></li>
+  
+      </ul><br>
+    </div>
+    <br>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10 text-center">
+      {% block content %}
+      {% endblock %}
+      
+    </div>
+  </div>
+</div>
+<footer class="fluid-container bg-light text-center text-lg-start">
+  
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-dark" href="#">By Jaroslaw</a>
+  </div>
+  
+</footer>
+</body>
+</html>
+{% else %}
+<h1>Forbidden! Login to access page.</h1>
+{% endif %}

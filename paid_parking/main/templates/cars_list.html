@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  button{
+border: none;
+}
+button a{
+background: #212529;
+padding: .5rem;
+color: white;
+text-decoration: none;
+}
+button a:hover{
+background: #414952;
+color: white;
+}
+</style>
+<div class="container-fluid">
+    
+  <table class="table" style="text-align: center; margin: 2rem 0 ;">        
+    <thead>      
+      <tr> 
+        <th scope="col">License Plate</th>
+        <th scope="col">Resident</th> 
+        <th scope="col">Total Amount</th>            
+      </tr>
+    </thead>
+    
+    <tbody>        
+      {% for car in object_list %}
+      <tr>
+        <th scope="row">{{car.license_plate}}</th>
+        <td>{{car.resident}}</td> 
+        <td><button><a href="{% url 'bill' car.license_plate %}">View Total Amount</a></button></td>      
+      </tr> 
+    {% endfor %}     
+    </tbody>
+      
+  </table>
+</div>
+{% endblock %}

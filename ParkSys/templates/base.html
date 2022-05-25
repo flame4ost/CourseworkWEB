@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Smart Parking System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body{
+      background-color:  #f1f1f1;;
+    }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+      
+    }
+    .sidenav a{
+      
+      font-size: medium;
+      font-weight:bold;
+      text-align: center;
+      padding-top: 0.9em;
+      margin-top: 0.9em;
+    }
+    form { margin: 0 auto; }
+    
+        
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid col-lg-12 " style="background-color: rgba(0, 0, 0, 0.2);" >
+  <header class=" text-center page-header" >
+    <h1>Система паркування</h1>
+    <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="#">Map</a>
+      {% if user.is_authenticated %}
+      <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="accounts/logout">Logout</a>
+    {% else %}
+    <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="accounts/login">Login</a>
+    {% endif %}
+    </header>
+  </div>
+
+
+<div class="container-fluid">
+  <div class="row content" style="min-height:700px">
+        
+    <div class="col-lg-4 "></div>
+    <div class="col-lg-4 " style="margin-top: 30px;">
+      {% block content %}
+      {% endblock %}
+    </div>
+    </div>
+  </div>
+</div>
+<footer class="fluid-container bg-light text-center text-lg-start">
+  
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-dark" href="#">By Jaroslaw</a>
+  </div>
+  
+</footer>
+</body>
+</html>
+

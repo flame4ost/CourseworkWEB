@@ -1,0 +1,4 @@
+django              == 3.2.6 
+django-filter       == 2.4.0
+
+

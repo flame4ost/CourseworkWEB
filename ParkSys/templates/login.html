@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center ">Авторизація (Увійти)</h1>
+<div class="jumbotron text-center" style="height:100%; align-content: center; background-color: rgb(250, 249, 246);" >
+  
+    <div class="form-group">
+        <form class="formss" action="login" method="post">
+        {% csrf_token %}
+        
+        
+        
+         {% for message in messages %}
+         <div class="alert alert-danger">
+                 {{message}}
+          </div>
+                 {% endfor %}
+          <div class="form-group">
+            
+            <input type="email" class="form-control" name="email" placeholder="Email address" required>
+          </div>
+          <div class="form-group">
+           
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+          </div>
+          <div class="checkbox">
+            <label><a href="register">Новий користувач? Реєстрація тут...</a></label>
+          </div>
+          <button type="submit" class="btn btn-default">Вхід</button>
+        </form> 
+      
+  </div>  
+  
+</div>
+{% endblock %}

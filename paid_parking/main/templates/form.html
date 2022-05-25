@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+form{
+margin: auto;
+width: 60%;
+transform: translateY(100%);
+}
+form label{
+font-weight: 600;
+padding: 0;
+margin: 10px 0;
+}
+form input[type="submit"]{
+background: #212529;
+color: white;
+}
+</style>
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="">License Plate</label>
+    <input type="text" name="license_plate" class="form-control">
+    <input type="submit" value="Create Ticket" class="form-control">
+
+</form>
+{% endblock %}

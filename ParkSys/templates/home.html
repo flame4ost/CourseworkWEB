@@ -1,0 +1,86 @@
+{% extends 'mainbase.html' %}
+{% block head %}
+  
+{% endblock %}
+ 
+{% block content %}
+
+<div class="row">
+<h1>ДОСТУПНІ МІСЦЯ ДЛЯ ПАРКОВКИ</h1>
+{% for i in freespots %}
+<div class="jumbotron col-sm-3" style="background-color:rgb(250, 249, 246);margin-right:0.3em;">
+  <h2>Паркувальне місце {{i.id}}</h2>
+
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{i.id}}">прийняти замовлення</button>
+  <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#d{{i.id}}">Шлях</button>
+  
+  <div class="modal fade" role="dialog" id="{{i.id}}" >
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Заповніть деталі</h4>
+        </div>
+        <div class="modal-body">
+          <form method='post' action='book'>
+          
+          {% csrf_token %}
+          <input type="hidden" name="slotid" value="{{i.id}}" />
+          <br>
+          <input name="userid" type="hidden" value="{{user.id}}" />
+          <br>
+          <label >Години стоянки:</label>
+           <input type ='number' class="integer"  name="hours" min="1" max="24" required/>
+           <br>
+           <label>Транспортний засіб Id:</label>
+            <input type ='text'  name='vehicleid' required/>
+            <br>
+           <button type="submit" class="btn btn-success" >Підтвердити бронювання</button>
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          </form>
+        </div>
+        <div class="modal-footer">    
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" id="d{{i.id}}" >
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Вказівки для цього слота</h4>
+        </div>
+        <div class="modal-body well">
+        {{i.directions}}
+        </div>
+        <div class="modal-footer">
+        <a class="btn btn-info"  href="http://maps.google.com/maps?saddr=25.429292,81.770054&daddr={{i.destination}}" target="_blank">Open in Google Maps</a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Закрити</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+<div class="row">
+<h1>НЕДОСТУПНІ МІСЦЯ ПАРКОВКИ</h1>
+{% for z in occupiedspots %}
+<div class="jumbotron col-sm-3" style="background-color:#ffdede;margin-right:0.3em;">
+  <h2>Паркувальне місце {{z.slotid.id}}</h2>
+  <h4>Доступний після:</h4>
+  <strong>{{z.etime}}</strong>
+  <br>
+  {% if user.is_superuser %}
+   <form action="vacate" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{z.slotid.id}}" name="slotid" />
+    <button class="btn btn-success btn-lg" type="submit">Звільнити</button>
+    {% endif %}
+  
+</div>
+{% endfor %}
+</div>
+{% endblock %}

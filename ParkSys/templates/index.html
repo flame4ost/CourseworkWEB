@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Smart Parking System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+    body{
+      background-color:  #f1f1f1;;
+    }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+      
+    }
+      #showcase {
+      background-image: url('../icon/logo.png');
+      background-position: center right;
+      background-repeat:initial;
+      margin: 0%;
+      height:300px;
+      text-align:center;
+    }
+    #showcase h1{
+        margin-top: 0%;
+        font-size: 50px;
+        padding-top: 10%;
+        color:rgb(250, 247, 91);
+
+    }
+    .sidenav a{
+      
+      font-size: medium;
+      font-weight:bold;
+      text-align: center;
+      padding-top: 0.9em;
+      margin-top: 0.9em;
+    }
+    form { margin: 0 auto; }
+    
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    } 
+    
+   
+  </style>
+</head>
+<body>
+  <div class="container-fluid " style="background-color: rgba(0, 0, 0, 0.2);" >
+  <header class=" text-center page-header" >
+    <h1>Система паркування</h1>
+    <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="#">Карта</a>
+    
+      {% if user.is_authenticated %}
+      <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="home">Головна</a>
+      <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="accounts/logout">Вийти </a>
+    {% else %}
+    <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="admin">Admin</a>
+    <a class="btn btn-success"style="float:right; margin:1em 0.4em 1em;" href="accounts/login">Увійти</a>
+
+    {% endif %}
+</header>
+  </div>
+
+
+<div class="container-fluid">
+    <div class="jumbotron text-center" style="min-height: 100px; margin:2em 0.3em 2em; background-color: rgb(223, 229, 230); box-sizing: border-box;">
+  <div class="row" >
+     
+        <div class="col-lg-4">
+            <h1>{{total}}</h1>
+            <h3>Загальна кількість паркувальних місць</h3>
+        </div>
+        
+        <div class="col-lg-4">
+        <h1>{{booked}}</h1>
+            <h3>Заброньовані місця для паркування</h3>
+            </div>
+        
+        <div class="col-lg-4">
+        <h1>{{vacant}}</h1>
+            <h3>Доступні місця для паркування</h3>
+            </div>
+    </div>
+   
+   
+    </div>
+  </div>
+</div>
+<footer class="fluid-container bg-light text-center text-lg-start">
+  
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-dark" href="#">By Jaroslaw</a>
+  </div>
+  
+</footer>
+</body>
+</html>
+

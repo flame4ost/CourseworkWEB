@@ -1,0 +1,20 @@
+{% extends 'mainbase.html' %}
+{% block head %}
+  
+{% endblock %}
+ 
+{% block content %}
+<div class="jumbotron ">
+<h2> ВАША ІСТОРІЯ ПАРКОВКИ</h2>
+<div class="text-left">
+{% for i in histry%}
+<ul style="list-style:none; background-color:rgb(255, 204, 102);">
+    <li class="well"><h4> Ваш автомобіль <strong>(id:{{i.vehicleid}})</strong> був припаркований на стоянці <strong>{{i.slotid.id}} </strong>from  <strong>{{i.stime}}  </strong>{% if i.etime != None%}
+     till <strong>  {{i.etime}}</strong> 
+    {% endif %}</h4></li>
+    </ul>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

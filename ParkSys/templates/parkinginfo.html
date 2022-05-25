@@ -1,0 +1,50 @@
+{% extends 'mainbase.html' %}
+{% block head %}
+  
+{% endblock %}
+ 
+{% block content %}
+<div class="jumbotron col-lg-8 offset-4" style="background-color:#ffe6e6;">
+    <h3 >У вас активне бронювання.
+    Ви паркуєте свій транспортний засіб (id:<strong> {{vehicleid}}</strong>)
+    на стоянці: <strong>{{slotid}} </strong>від<strong> {{stime}} </strong> до  <strong> {{etime}} </strong>
+    Якщо ви розпаркували свій автомобіль або розпаркували зараз, натисніть <strong>Звільнити парковку</strong>
+   так що місце для паркування:  <strong>{{slotid}} </strong> стає доступним для інших користувачів.
+    </h3>
+    <form action="vacate" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{slotid}}" name="slotid" />
+    <button class="btn btn-success btn-lg" type="submit">Звільнити</button>
+    <div>  </div>
+    </form>
+    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#{{slotid}}">Extend Time</button>
+    <div class="modal fade" role="dialog" id="{{slotid}}" >
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Введіть години для продовження</h4>
+        </div>
+        <div class="modal-body">
+          <form method='post' action='extendtime'>
+          
+          {% csrf_token %}
+          <input type="hidden" name="slotid" value="{{slotid}}" />
+          <br>
+          <input name="userid" type="hidden" value="{{user.id}}" />
+          <br>
+          <label >Parking hours:</label>
+           <input type ='number' class="integer"  name="hours" min="1" max="5" required/>
+           <button type="submit" class="btn btn-success" >Підтвердьте розширення</button>
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
+          </form>
+        </div>
+        <div class="modal-footer">    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
